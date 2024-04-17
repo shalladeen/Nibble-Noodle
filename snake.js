@@ -2,7 +2,8 @@ var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 var grid = 16;
 var count = 0;
-var score = 0; // Score counter
+var scoreElement = document.getElementById('score'); 
+var score = 0;
 var gameOver = false;
 
 var snake = {
@@ -34,14 +35,37 @@ function resetGame() {
   apple.y = getRandomInt(0, 25) * grid;
   score = 0;
   gameOver = false;
+  updateScore();
+}
+
+function updateScore() {
+  scoreElement.textContent = 'Score: ' + score;
 }
 
 function loop() {
   requestAnimationFrame(loop);
 
   if (gameOver) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    context.fillStyle = 'red';
+    context.font = '20px "Press Start 2P"';
+    var gameOverText = 'GAME OVER';
+    var gameOverTextWidth = context.measureText(gameOverText).width;
+    context.fillText(gameOverText, (canvas.width - gameOverTextWidth) / 2, canvas.height / 2 - 20);
+
+    var fontSize = 13 + Math.sin(pulseTime) * 0.10; 
+    context.fillStyle = 'white';
+    context.font = `${fontSize}px "Press Start 2P"`;
+    var restartText = 'Press Spacebar to Restart';
+    var restartTextWidth = context.measureText(restartText).width;
+    context.fillText(restartText, (canvas.width - restartTextWidth) / 2, canvas.height / 2 + 20);
+
+    pulseTime += 0.1;
     return;
   }
+
+  pulseTime = 0;
 
   if (++count < 10) {
     return;
@@ -82,24 +106,15 @@ function loop() {
       score++;
       apple.x = getRandomInt(0, 25) * grid;
       apple.y = getRandomInt(0, 25) * grid;
+      updateScore();
     }
 
     for (var i = index + 1; i < snake.cells.length; i++) {
       if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
         gameOver = true;
-        context.fillStyle = 'red';
-        context.font = '30px Arial';
-        context.fillText('GAME OVER', 50, 200);
-        context.fillStyle = 'white';
-        context.font = '20px Arial';
-        context.fillText('Press Space to Restart', 50, 230);
       }
     }
   });
-
-  context.fillStyle = 'white';
-  context.font = '12px Arial';
-  context.fillText('Score: ' + score, 5, canvas.height - 5);
 }
 
 document.addEventListener('keydown', function(e) {

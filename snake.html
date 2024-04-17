@@ -1,29 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Basic Snake HTML Game</title>
+  <title>Basic Snake Game</title>
   <meta charset="UTF-8">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    
-    body {
-      background: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    canvas {
-      border: 1px solid white;
-      background: black;
-    }
-    </style> 
- <script src="snake.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <script src="snake.js" defer></script>
 </head>
 <body>
-<canvas width="400" height="400" id="game"></canvas>
-
+  <h1 id="greeting">Welcome to the Snake Game!</h1>
+  <div id="score">Score: 0</div>
+  <canvas width="400" height="400" id="game"></canvas>
 </body>
 </html>
