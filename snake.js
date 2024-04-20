@@ -42,8 +42,26 @@ function updateScore() {
   scoreElement.textContent = 'Score: ' + score;
 }
 
+function showStartMenu(){
+  context.fillStyle = 'black';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  var title = 'Nibble Noodle';
+  context.fillStyle = 'white';
+  context.font = '20px "Press Start 2P"';
+  context.textAlign = 'center';
+  context.fillText(title, canvas.width / 2, canvas.height / 2 - 30);
+
+  var fontSize = 13 + Math.sin(pulseTime) * 0.10;
+  context.font = `${fontSize}px "Press Start 2P"`;
+  var startText = 'Press Spacebar to Start';
+  context.fillText(startText, canvas.width / 2, canvas.height / 2 + 20);
+
+  pulseTime += 0.1;
+}
+
 function loop() {
   requestAnimationFrame(loop);
+  context.imageSmoothingEnabled = false;
 
   if (gameOver) {
     context.clearRect(0, 0, canvas.width, canvas.height);

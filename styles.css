@@ -23,10 +23,12 @@ html, body {
     margin-bottom: 10px;
     text-align: center;
     font-family: 'Press Start 2P', cursive; 
+    padding-bottom: 20px;
   }
 
   
   canvas {
     border: 1px solid white;
+    margin-bottom: 100px;
   }
   
